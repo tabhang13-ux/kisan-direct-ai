@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: kisandirect-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: kisandirect
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: kisandirect-backend
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      DATABASE_URL: "postgresql://postgres:password123@postgres:5432/kisandirect?schema=public"
+      JWT_SECRET: "kisandirect_secret_key_sih_2026"
+      ML_SERVICE_URL: "http://ml-service:8000"
+    depends_on:
+      - postgres
+
+  ml-service:
+    build: ./ml-service
+    container_name: kisandirect-ml-service
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: kisandirect-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

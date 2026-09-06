@@ -1,0 +1,26 @@
+{
+  "name": "kisandirect-ai",
+  "version": "1.0.0",
+  "description": "KisanDirect AI - Direct Farm-to-Buyer Marketplace (SIH Problem Statement 26033)",
+  "scripts": {
+    "db:seed": "cd backend && node ../prisma/seed.js",
+    "ml:train": "python ml-service/app/train.py",
+    "start:backend": "cd backend && npm run start",
+    "start:frontend": "cd frontend && npm run dev",
+    "start:ml": "python -m uvicorn ml-service.app.main:app --port 8000 --reload"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.10.0",
+    "bcryptjs": "^2.4.3"
+  },
+  "keywords": [
+    "agritech",
+    "sih2026",
+    "doca",
+    "demand-forecasting",
+    "route-optimization",
+    "direct-marketplace"
+  ],
+  "author": "Google Antigravity AI Team",
+  "license": "MIT"
+}
