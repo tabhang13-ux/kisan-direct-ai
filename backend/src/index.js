@@ -1,3 +1,9 @@
+app.get("/", (req, res) => {
+  res.json({
+    message: "KisanDirect AI Express REST API is running",
+    status: "success"
+  });
+});
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
